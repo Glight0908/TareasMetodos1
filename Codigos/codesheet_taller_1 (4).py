@@ -137,3 +137,38 @@ for k, v in angles_with_d.items():
     print(f"{k} = {v}")
 
 print("\ni) c · (a × b) =", scalar_triple)
+
+#ejercicio 13 (1.5.7)
+
+# Variable
+t = sp.symbols('t', real=True)
+
+# Parametrización del círculo de radio 1
+x = sp.cos(t)
+y = sp.sin(t)
+
+# Componentes del campo de fuerza
+Fx = -y / (x**2 + y**2)
+Fy =  x / (x**2 + y**2)
+
+# Derivadas dx/dt y dy/dt
+dx = sp.diff(x, t)
+dy = sp.diff(y, t)
+
+# Producto punto F·dr
+integrando = sp.simplify(Fx*dx + Fy*dy)
+
+# Integrales simbólicas
+I_pos = sp.integrate(integrando, (t, 0, sp.pi))   # CCW
+I_neg = sp.integrate(integrando, (t, 0, -sp.pi))  # CW
+
+# Trabajo en contra del campo
+W_pos = -I_pos
+W_neg = -I_neg
+
+# Resultados
+print("Integrando F·dr:", integrando)
+print("Integral 0 -> pi (CCW):", I_pos)
+print("Integral 0 -> -pi (CW):", I_neg)
+print("Trabajo en contra 0 -> pi:", W_pos)
+print("Trabajo en contra 0 -> -pi:", W_neg)
